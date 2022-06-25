@@ -1,13 +1,22 @@
 Présentation du rôle grafana
 =========
 
-Ce rôle a pour objectif d'installer node_exporter sur un hôte distant. 
-node_exporter est un service qui permet d'exposer les métriques du système et des applications supervisées afin de permettre à Prometheus de les collecter.
+Ce rôle a pour objectif d'installer grafana sur un hôte distant. [Grafana](https://grafana.com/) est un logiciel libre qui permet la visualisation de données. Il permet de réaliser des tableaux de bord et des graphiques à partir de multiples sources dont des bases de données temporelles.
 
-Requirements
+Prérequis
 ------------
 
-Node Exporter est un logiciel que vous pouvez installer sur les systèmes UNIX (Linux, OpenBSD, FreeBSD ou Darwin). Pour les systèmes windows, il existe [windows_exporter](https://github.com/prometheus-community/windows_exporter) pour les utilisateurs Windows.
+Grafana est supporté sur les systèmes d'exploitation suivants : 
+  - Debian / Ubuntu
+  - RPM-based Linux (CentOS, Fedora, OpenSuse, RedHat)
+  - macOS
+  - Windows
+
+Au niveau Hardware, Grafana utilise peu de ressources mémoire et CPU :
+  - Mémoire minimum recommandée : 255 MB
+  - Quantité minimum de CPU recocommandé : 1
+
+Néanmoins, certaines fonctionnalités nécessitent davantage de ressources.
 
 Variables du rôle
 --------------

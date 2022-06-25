@@ -1,13 +1,17 @@
 Présentation du rôle prometheus
 =========
 
-Ce rôle a pour objectif d'installer node_exporter sur un hôte distant. 
-node_exporter est un service qui permet d'exposer les métriques du système et des applications supervisées afin de permettre à Prometheus de les collecter.
+Ce rôle a pour objectif d'installer prometheus sur un hôte distant. 
+[Prometheus](https://prometheus.io/) est un logiciel libre de surveillance informatique et générateur d'alertes. Il enregistre des métriques en temps réel dans une base de données de séries temporelles en se basant sur le contenu de point d'entrée exposé à l'aide du protocole HTTP. Ici, il se basera sur le contenu du ou des node_exporter.
 
 Requirements
 ------------
+Prometheus peut être installé sur les systèmes UNIX (Linux, OpenBSD, FreeBSD, etc), Windows, ainsi que divers autres systèmes d'exploitations.
 
-Node Exporter est un logiciel que vous pouvez installer sur les systèmes UNIX (Linux, OpenBSD, FreeBSD ou Darwin). Pour les systèmes windows, il existe [windows_exporter](https://github.com/prometheus-community/windows_exporter) pour les utilisateurs Windows.
+La configuration minimale requise est la suivante :
+  - Minimum 2 CPU
+  - Au moins 4 Go de mémoire
+  - 20 Go d'espace disque libre
 
 Variables du rôle
 --------------
