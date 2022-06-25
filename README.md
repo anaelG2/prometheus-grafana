@@ -9,9 +9,9 @@ Playbook Ansible permettant de déployer des services de supervision basés sur 
 Rôles
 ------------
 
-  - [grafana](roles/grafana/README.md)
-  - [prometheus](roles/prometheus/README.md)
-  - [node_exporter](roles/node_exporter/README.md)
+  - [grafana](roles/grafana/)
+  - [prometheus](roles/prometheus/)
+  - [node_exporter](roles/node_exporter/)
 
 
 
