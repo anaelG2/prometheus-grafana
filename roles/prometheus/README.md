@@ -16,9 +16,12 @@ La configuration minimale requise est la suivante :
 Variables du rôle
 --------------
 
-Voici les différentes variables qui sont utilisées dans ce rôle : 
+Voici les variables principales utilisées par ce rôle : 
 
 | Variable  | Description |
 | --- | --- |
-| grafana_adminUser  | Nom d'utilisateur utilisé pour l'accès à l'interface d'administration Grafana (GUI)  |
-| grafana_adminPassword  | Mot de passe utilisé pour l'accès à l'interface d'administration Grafana (GUI)  |
+| prometheus_retentionTime | Durée de rétention des métriques collectés |
+| prometheus_scrapeInterval  | Fréquence de collecte des métriques  |
+| prometheus_node_exporter_group  | Groupe de node_exporter sur lesquels réaliser la collecte |
+| prometheus_dirConf  | Chemin du répertoire de configuration de prometheus |
+
