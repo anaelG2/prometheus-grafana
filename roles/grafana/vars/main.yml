@@ -1,0 +1,4 @@
+---
+# vars file for node_exporter
+grafana_adminUser: "grafana"
+grafana_adminPassword: "grafana"

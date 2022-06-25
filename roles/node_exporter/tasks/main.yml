@@ -1,0 +1,75 @@
+---
+# Tasks du rôle node_exporter
+
+- name: On regarde si le binaire node_exporter est présent
+  stat:
+    path: "{{ node_exporter_binPath }}"
+  register: __check_node_exporter_present
+
+
+- name: Récupération de la version si node_exporter existe
+  shell: "cat /etc/systemd/system/node_exporter.service | grep Version | sed s/'.*Version '//g"
+  register: __get_node_exporter_version
+  when: __check_node_exporter_present.stat.exists == true
+  changed_when: false
+
+- name: Création de l'utilisateur node_exporter
+  ansible.builtin.user:
+    name: "{{ node_exporter_userName }}"
+    append: true
+    shell: /usr/sbin/nologin
+    system: true
+    create_home: false
+    home: /
+
+- name: On s'assure que le groupe node_exporter_userName existe
+  ansible.builtin.group:
+    name: "{{ node_exporter_groupName }}"
+    state: present
+
+- name: Création du répertoire de configuration de node_exporter
+  ansible.builtin.file:
+    path: "{{ node_exporter_dirConf }}"
+    state: directory
+    owner: "{{ node_exporter_userName }}"
+    group: "{{ node_exporter_groupName }}"
+
+
+- name: Télécharge la version node_exporter_version de node_exporter 
+  ansible.builtin.unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-amd64.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+    validate_certs: no
+
+- name: Déplacement du binaire vers node_exporter_binPath
+  ansible.builtin.copy:
+    src: "/tmp/node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter"
+    dest: "{{ node_exporter_binPath }}"
+    owner: "{{ node_exporter_userName }}"
+    group: "{{ node_exporter_groupName }}"
+    mode: 0755
+    remote_src: yes
+  when: __check_node_exporter_present.stat.exists == false or not __get_node_exporter_version.stdout == node_exporter_version
+
+- name: Suppression des binaires...
+  ansible.builtin.file:
+    path: /tmp/node_exporter-{{ node_exporter_version }}.linux-amd64/
+    state: absent
+
+- name: Installation du service node_exporter.service
+  ansible.builtin.template:
+    src: node_exporter.service.j2
+    dest: /etc/systemd/system/node_exporter.service
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart_node_exporter_and_daemon
+  
+- ansible.builtin.meta: flush_handlers
+
+- name: Activation au démarrage du service node_exporter.service
+  ansible.builtin.systemd:
+    name: node_exporter
+    state: started
+    enabled: yes

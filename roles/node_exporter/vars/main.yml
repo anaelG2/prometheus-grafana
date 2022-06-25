@@ -1,0 +1,9 @@
+---
+# vars file for node_exporter
+
+node_exporter_serviceName: "node_exporter"
+node_exporter_userName: "node_exporter"
+node_exporter_groupName: "{{ node_exporter_userName }}"
+node_exporter_version: "1.3.1"
+node_exporter_binPath: /usr/local/bin/node_exporter
+node_exporter_dirConf: /etc/node_exporter
