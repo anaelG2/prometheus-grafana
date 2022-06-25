@@ -24,4 +24,4 @@ Utilisation
 
 3. Déployer le playbook à l'aide la commande suivante :
 
-    > ansible-playbook -i inventory.yml playbook.yml
+    `ansible-playbook -i inventory.yml playbook.yml`
