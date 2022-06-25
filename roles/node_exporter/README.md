@@ -1,38 +1,20 @@
-Role Name
+Présentation du rôle node_exporter
 =========
 
-A brief description of the role goes here.
+Ce rôle a pour objectif d'installer node_exporter sur un hôte distant. 
+node_exporter est un service qui permet d'exposer les métriques du système et des applications supervisées afin de permettre à Prometheus de les collecter.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Node Exporter est un logiciel que vous pouvez installer sur les systèmes UNIX (Linux, OpenBSD, FreeBSD ou Darwin). Pour les systèmes windows, il existe [windows_exporter](https://github.com/prometheus-community/windows_exporter) pour les utilisateurs Windows.
 
-Role Variables
+Variables du rôle
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Voici les différentes variables qui sont utilisées dans ce rôle : 
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+| Variable  | Description |
+| --- | --- |
+| grafana_adminUser  | Nom d'utilisateur utilisé pour l'accès à l'interface d'administration Grafana (GUI)  |
+| grafana_adminPassword  | Mot de passe utilisé pour l'accès à l'interface d'administration Grafana (GUI)  |

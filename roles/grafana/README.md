@@ -1,4 +1,4 @@
-Présentation du rôle node_exporter
+Présentation du rôle grafana
 =========
 
 Ce rôle a pour objectif d'installer node_exporter sur un hôte distant. 
@@ -12,5 +12,9 @@ Node Exporter est un logiciel que vous pouvez installer sur les systèmes UNIX (
 Variables du rôle
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Voici les différentes variables qui sont utilisées dans ce rôle : 
 
+| Variable  | Description |
+| --- | --- |
+| grafana_adminUser  | Nom d'utilisateur utilisé pour l'accès à l'interface d'administration Grafana (GUI)  |
+| grafana_adminPassword  | Mot de passe utilisé pour l'accès à l'interface d'administration Grafana (GUI)  |
