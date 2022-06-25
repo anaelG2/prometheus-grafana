@@ -15,4 +15,4 @@ Utilisation
 
 2. Personnalisez le playbook en modifiant les valeures des fichier vars/main.yml des différents rôles
 
-ansible-playbook -i inventory.yml playbook.yml
+> ansible-playbook -i inventory.yml playbook.yml
