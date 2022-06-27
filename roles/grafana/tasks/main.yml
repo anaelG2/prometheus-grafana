@@ -43,15 +43,15 @@
     enabled: yes
 
 
-- name: Ajout de la datasource prometheus
-  community.grafana.grafana_datasource:
-    name: "prometheus-local"
-    grafana_url: "http://127.0.0.1:3000"
-    grafana_user: "{{ grafana_adminUser }}"
-    grafana_password: "{{ grafana_adminPassword }}"
-    ds_type: "prometheus"
-    ds_url: "http://127.0.0.1:9090"
-  changed_when: false
+# - name: Ajout de la datasource prometheus
+#   community.grafana.grafana_datasource:
+#     name: "prometheus-local"
+#     grafana_url: "http://127.0.0.1:3000"
+#     grafana_user: "{{ grafana_adminUser }}"
+#     grafana_password: "{{ grafana_adminPassword }}"
+#     ds_type: "prometheus"
+#     ds_url: "http://127.0.0.1:9090"
+#   changed_when: false
 
 - name: Attendre que grafana soit up
   uri:
@@ -62,19 +62,41 @@
   retries: 120
   delay: 1
 
-- name: Installation du dashboard node-exporter
-  get_url:
-    url: https://raw.githubusercontent.com/rfrail3/grafana-dashboards/master/prometheus/node-exporter-full.json
-    dest: /var/lib/grafana/node-exporter.json
-    mode: '0755'
+- name: Copy dashboards .json
+  ansible.builtin.copy:
+    src: node-exporter.json
+    dest: "/var/lib/grafana/node-exporter.json"
+    owner: "{{ grafana_adminUser }}"
+    group: "{{ grafana_adminUser }}"
+    mode: '0777'
 
-- name: Activation du dashboard node exporter
-  template:
-    src: dashboard-node-exporter.yml.j2
-    dest: /etc/grafana/provisioning/dashboards/dashboard-node-exporter.yml
-    mode: 0755
-  notify: restart_grafana
+- name: Import dashboard
+  grafana_dashboard:
+    grafana_url: http://127.0.0.1:3000
+    grafana_user: "{{ grafana_adminPassword }}"
+    grafana_password: "{{ grafana_adminUser }}"
+    org_id: 1
+    state: present
+    uid: "1860"
+    path: "/var/lib/grafana/node-exporter.json"
+  register: output
+
+
+
+# - name: Installation du dashboard node-exporter
+#   get_url:
+#     url: https://raw.githubusercontent.com/rfrail3/grafana-dashboards/master/prometheus/node-exporter-full.json
+#     dest: /var/lib/grafana/node-exporter.json
+#     mode: '0755'
+
+# - name: Activation du dashboard node exporter
+#   template:
+#     src: dashboard-node-exporter.yml.j2
+#     dest: /etc/grafana/provisioning/dashboards/dashboard-node-exporter.yml
+#     mode: 0755
+#   notify: restart_grafana
 
 - meta: flush_handlers
 
-
+- meta: "{{ output.out }}"
+- meta: "{{ output.stderr }}"
