@@ -7,7 +7,7 @@ node_exporter est un service qui permet d'exposer les métriques du système et 
 Prérequis
 ------------
 
-Node Exporter est un logiciel qui peut être installé sur les systèmes UNIX (Linux, OpenBSD, FreeBSD, etc). Pour les systèmes windows, il existe [windows_exporter](https://github.com/prometheus-community/windows_exporter) pour les utilisateurs Windows.
+Node Exporter est un logiciel qui peut être installé sur les systèmes UNIX (Linux, OpenBSD, FreeBSD, etc). Pour les systèmes Windows, il existe [windows_exporter](https://github.com/prometheus-community/windows_exporter).
 
 En termes de consommation de ressources et d'espace disque, node_exporter est reste relativement léger. 
 
