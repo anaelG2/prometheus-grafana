@@ -5,7 +5,6 @@ Playbook Ansible permettant de déployer des services de supervision basés sur 
 
 
 
-
 Rôles
 ------------
 
@@ -25,3 +24,8 @@ Utilisation
 3. Déployer le playbook à l'aide la commande suivante :
 
     `ansible-playbook -i inventory.yml playbook.yml`
+
+4. Accéder à l'interface d'administration Grafana :
+
+    `http://TARGET_HOST:3000/`
+    
